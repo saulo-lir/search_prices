@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: search_prices_app
+  pool: 5
+  username: admin_user
+  password: admin_user
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: search_prices_app
+  pool: 5
+  username: admin_user
+  password: admin_user
+  host: localhost
