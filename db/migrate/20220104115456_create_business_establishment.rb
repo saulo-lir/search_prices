@@ -12,9 +12,10 @@ class CreateBusinessEstablishment < ActiveRecord::Migration[6.0]
       t.string :neighborhood
       t.string :zip_code
       t.string :city_ibge_code
-      t.string :city_name
-      t.string :latitude
-      t.string :longitude
+      t.string :city
+      t.string :state
+      t.decimal :latitude
+      t.decimal :longitude
     end
   end
 end

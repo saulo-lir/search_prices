@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(version: 2022_01_04_122046) do
     t.string "neighborhood"
     t.string "zip_code"
     t.string "city_ibge_code"
-    t.string "city_name"
-    t.string "latitude"
-    t.string "longitude"
+    t.string "city"
+    t.string "state"
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

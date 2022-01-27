@@ -22,6 +22,12 @@ gem 'puma', '~> 4.1'
 # Http request
 gem 'httparty', '~> 0.20.0'
 
+# Serializer
+gem 'jsonapi-serializer'
+
+# Geolocation
+gem 'geocoder', '~> 1.7', '>= 1.7.3'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
