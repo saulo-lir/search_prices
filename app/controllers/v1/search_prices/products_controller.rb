@@ -17,9 +17,16 @@ module V1
                status: :ok
       end
 
-      private
+      def prices
+        cnpjs = params.fetch(:cnpjs)
+        getin_codes = params.fetch(:getin_codes)
 
-      # Exemples methods
+        products = ProductsByBusinessEstablishment.new
+        products = products.products_grouped_by_establishment(getin_codes, cnpjs)
+
+        binding.pry
+      end
+
       def search_prices_online
         url = 'http://api.sefaz.al.gov.br/sfz_nfce_api/api/public/consultarPrecoProdutoEmEstabelecimento'
         headers = {
@@ -27,13 +34,18 @@ module V1
           'AppToken' => '982394dc00816a2c39240fd9ae291ec202b420fa'
         }
         body = {
-          cnpj: '06057223039469',
-          codigoBarras: '7896481130267',
+          cnpj: '14937103000197',
+          codigoBarras: '78911314',
           quantidadeDeDias: 3
         }.to_json
 
-        HTTParty.post(url, body: body, headers: headers)
+        product = HTTParty.post(url, body: body, headers: headers)
+
+        render json: product,
+               status: :ok
       end
+
+      private
 
       def search_prices_local
         products = ProductsByBusinessEstablishment.new
