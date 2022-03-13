@@ -5,8 +5,11 @@ class ProductsByBusinessEstablishment < ApplicationRecord
     ProductsByBusinessEstablishment.where(attrs)
   end
 
-  # TO DO: Concluir query
   def products_grouped_by_establishment(getin_codes, cnpjs)
-    ProductsByBusinessEstablishment.where({ getin_code: getin_codes, cnpj: cnpjs })
+    products = ProductsByBusinessEstablishment.where({ getin_code: getin_codes, cnpj: cnpjs })
+    getin_codes_not_found = getin_codes - products.pluck(:getin_code)
+    products = products.sort_by(&:value_last_sale)
+    products = products.group_by(&:cnpj)
+    [products, getin_codes_not_found]
   end
 end

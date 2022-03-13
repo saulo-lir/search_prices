@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get '/products', to: 'products#index'
       get '/products/prices', to: 'products#prices'
       get '/products/search_prices_online', to: 'products#search_prices_online'
+      get '/products/ping', to: 'products#ping'
+      get '/products/generate_route', to: 'products#generate_route'
     end
   end
 end

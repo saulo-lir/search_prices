@@ -28,6 +28,9 @@ gem 'jsonapi-serializer'
 # Geolocation
 gem 'geocoder', '~> 1.7', '>= 1.7.3'
 
+# Vehicle Routing Problem and Traveling Salesman Problem
+gem 'routific'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
