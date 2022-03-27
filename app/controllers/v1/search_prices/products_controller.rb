@@ -15,7 +15,7 @@ module V1
         establishments = establishments.get_establishment_by_current_location(current_location)
 
         # TO DO: Serializar antes de enviar para o front
-        render json: establishments,
+        render json: BusinessEstablishmentSerializer.new(establishments).serializable_hash,
                status: :ok
       end
 
