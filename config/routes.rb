@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     namespace :search_prices do
-      get '/products', to: 'products#index'
+      get '/establishments', to: 'establishments#index'
       get '/products/prices', to: 'products#prices'
       get '/products/search_prices_online', to: 'products#search_prices_online'
       get '/products/ping', to: 'products#ping'
