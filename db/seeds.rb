@@ -130,6 +130,66 @@ business_establishments = [
     state: 'AL',
     latitude: -9.6592443,
     longitude: -35.7025463
+  },
+  {
+    cnpj: '75315333009831',
+    company_name: 'ATACADAO S.A.',
+    trade_name: 'ATACADAO',
+    phone: nil,
+    street: 'AV DOUTOR DURVAL DE GOES MONTEIRO',
+    number: '12650',
+    neighborhood: 'TABULEIRO DO MARTINS',
+    zip_code: '57081285',
+    city_ibge_code: nil,
+    city: 'MACEIO',
+    state: 'AL',
+    latitude: -9.5697151,
+    longitude: -35.7750271
+  },
+  {
+    cnpj: '41185455000610',
+    company_name: 'UNI COMPRA SUPERMERCADOS LTDA',
+    trade_name: 'UNI COMPRA',
+    phone: nil,
+    street: 'AV TOMAS ESPINDOLA',
+    number: '472',
+    neighborhood: 'FAROL',
+    zip_code: '57051000',
+    city_ibge_code: nil,
+    city: 'MACEIO',
+    state: 'AL',
+    latitude: -9.6549186,
+    longitude: -35.7327541
+  },
+  {
+    cnpj: '30753042000164',
+    company_name: 'JSR COMERCIO DE ALIMENTOS LTDA',
+    trade_name: 'HAVANNA',
+    phone: '(82) 96003715',
+    street: 'AV COMENDADOR GUSTAVO PAIVA',
+    number: '2990',
+    neighborhood: 'MANGABEIRAS',
+    zip_code: '57037901',
+    city_ibge_code: nil,
+    city: 'MACEIO',
+    state: 'AL',
+    latitude: -9.6375949,
+    longitude: -35.7036772
+  },
+  {
+    cnpj: '12303616000463',
+    company_name: 'S. VIEIRA DA SILVA EIRELI',
+    trade_name: 'CASA VIEIRA',
+    phone: '(82) 21234382',
+    street: 'AV FERNANDES LIMA',
+    number: '2723',
+    neighborhood: 'FAROL',
+    zip_code: '57050000',
+    city_ibge_code: nil,
+    city: 'MACEIO',
+    state: 'AL',
+    latitude: -9.6266644,
+    longitude: -35.738505
   }
 ]
 
@@ -237,6 +297,42 @@ products = [
     anp_code: nil,
     comercial_unit_code: nil,
     description: 'FEIJAO QUERO CARIOCA PRONTO TP 340G'
+  },
+  {
+    code: nil,
+    getin_code: '7891008045154',
+    cfop_code: nil,
+    ncm_code: '18062000',
+    anp_code: nil,
+    comercial_unit_code: nil,
+    description: 'COBER.CHOC.GAROTO'
+  },
+  {
+    code: nil,
+    getin_code: '7891000120606',
+    cfop_code: nil,
+    ncm_code: '19019090',
+    anp_code: nil,
+    comercial_unit_code: nil,
+    description: 'NUTREN NESTLE SENIOR CAFE COM LEITE 370G'
+  },
+  {
+    code: nil,
+    getin_code: '7791875005360',
+    cfop_code: nil,
+    ncm_code: '19019020',
+    anp_code: nil,
+    comercial_unit_code: nil,
+    description: 'POTE DOCE DE LEITE 800g'
+  },
+  {
+    code: nil,
+    getin_code: '7890130401173',
+    cfop_code: nil,
+    ncm_code: '18069000',
+    anp_code: nil,
+    comercial_unit_code: nil,
+    description: 'CHOC LINDT 235G LINDOR AO LEITE - 17.67'
   }
 ]
 
@@ -355,6 +451,46 @@ products_by_establishment = [
     last_sale_issue_date: '2022-03-27T13:50:42.000+0000',
     last_sale_issue_date_description: ''
   },
+  {
+    getin_code: '7891008045154',
+    cnpj: '75315333009831',
+    unit_value_last_sale: 64.9,
+    value_last_sale: 64.9,
+    minimum_value_sold: 64.9,
+    maximum_value_sold: 64.9,
+    last_sale_issue_date: '2022-04-15T15:41:13.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891000120606',
+    cnpj: '41185455000610',
+    unit_value_last_sale: 67.28,
+    value_last_sale: 67.28,
+    minimum_value_sold: 67.28,
+    maximum_value_sold: 67.28,
+    last_sale_issue_date: '2022-04-13T15:26:25.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7791875005360',
+    cnpj: '30753042000164',
+    unit_value_last_sale: 69,
+    value_last_sale: 69,
+    minimum_value_sold: 69,
+    maximum_value_sold: 69,
+    last_sale_issue_date: '2022-04-15T22:57:42.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7890130401173',
+    cnpj: '12303616000463',
+    unit_value_last_sale: 79.99,
+    value_last_sale: 79.99,
+    minimum_value_sold: 79.99,
+    maximum_value_sold: 79.99,
+    last_sale_issue_date: '2022-04-14T13:48:15.000+0000',
+    last_sale_issue_date_description: ''
+  }
 ]
 
 count = 0
