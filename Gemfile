@@ -43,6 +43,8 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
   gem 'faker'
   gem 'pry', '~> 0.13.1'
+  gem 'vcr', '~> 6.0'
+  gem 'webmock', '~> 3.8'
 end
 
 group :development do
