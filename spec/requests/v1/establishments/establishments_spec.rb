@@ -12,6 +12,7 @@ RSpec.describe 'V1 Establishments', type: :request do
       it 'returns establishments' do
         get_establishments
         result = JSON.parse(response.body)
+        binding.pry
 
         expect(response).to have_http_status(:ok)
         expect(result['data'].length).to eq(8)

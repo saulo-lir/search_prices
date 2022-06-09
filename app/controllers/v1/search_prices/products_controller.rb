@@ -6,14 +6,25 @@ module V1
   module SearchPrices
     class ProductsController < ApplicationController
       def prices
-        cnpjs = params.fetch(:cnpjs)
-        getin_codes = params.fetch(:getin_codes)
+        cnpjs = params[:cnpjs]
+        getin_codes = params[:getin_codes]
+        current_location = params[:current_location]
 
-        products = ProductsByBusinessEstablishment.new
-        prices, getin_codes_not_found = products.products_grouped_by_establishment(getin_codes, cnpjs)
+        establishments = BusinessEstablishment.new
+        establishments = establishments.establishments_indexed_by_cnpj(cnpj: cnpjs)
+
+        product = ProductsByBusinessEstablishment.new
+        products, getin_codes_not_found = product.where(
+          getin_code: getin_codes,
+          cnpj: cnpjs
+        )
+        products = product.ideal_products(products, establishments)
         #products = search_prices_online(getin_codes_not_found, cnpjs)
 
-        render json: prices,
+        optimized_route = generate_route(products, current_location)
+        ideal_fair = build_ideal_fair(products, optimized_route)
+
+        render json: ideal_fair,
                status: :ok
       end
 
@@ -37,80 +48,9 @@ module V1
                status: :ok
       end
 
-      def generate_route
-        routific = connect_routific_api
-
-        visits = [
-          {
-            "id" => "order_1",
-            "start" => "9:00",
-            "end" => "12:00",
-            "duration" => 10,
-            "location" => {
-              "name" => "Assaí Atacadista",
-              "lat" => -9.566313970441753,
-              "lng" => -35.77456526350128
-            }
-          },
-          {
-            "id" => "order_2",
-            "start" => "9:00",
-              "end" => "12:00",
-              "duration" => 10,
-              "location" => {
-                "name"=> "Big Supermercado",
-                "lat"=> -9.540731738997028,
-                "lng"=> -35.7867270052222
-              }
-          },
-          {
-            "id" => "order_3",
-            "start" => "9:00",
-              "end" => "12:00",
-              "duration" => 10,
-              "location" => {
-                "name"=> "Supermercado Líder",
-                "lat"=> -9.569360204626474,
-                "lng"=> -35.75645860278647
-              }
-          },
-          {
-            "id" => "order_4",
-            "start" => "9:00",
-              "end" => "12:00",
-              "duration" => 10,
-              "location" => {
-                "name"=> "Sexta de Alimentos",
-                "lat"=> -9.58378081657683,
-                "lng"=> -35.76809533175064
-              }
-          }
-        ]
-        
-        visits.each do |visit|
-          routific.set_visit(visit["id"], visit)
-        end
-
-        routific.set_vehicle("vehicle_1", {
-          "start_location" => {
-            "name" => "Casa",
-            "lat" => -9.549320146552429,
-            "lng" => -35.80975881586224
-          },
-          'end_location' => {
-            'name' => 'Casa',
-            'lat' => -9.549320146552429,
-            'lng' => -35.80975881586224
-          },
-          'shift_start' => '8:00',
-          'shift_end' => '12:00'
-        })
-
-        route = routific.get_route
-        binding.pry
-      end
-
       private
+
+      attr_reader :routific
 
       def search_prices_online(getin_codes, cnpjs)
         url = 'http://api.sefaz.al.gov.br/sfz_nfce_api/api/public/consultarPrecoProdutoEmEstabelecimento'
@@ -139,11 +79,95 @@ module V1
         products.get_prices({ getin_code: '7898286201968', cnpj: '13004510039395' })
       end
 
+      def generate_route(products, current_location)
+        establishments = products.pluck(:establishment).uniq
+        @routific = connect_routific_api
+
+        fill_establishments_to_visit(establishments)
+        fill_vehicle(current_location)
+
+        routific.get_route
+      end
+
       def connect_routific_api
-        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzYjE5Y2JhZGE0OTAwMTgxNTc4ZmUiLCJpYXQiOjE2NDY1MDYzOTZ9._IJhFyEwAi5OsTvT1smQwBZUZDfCY54eKwkGOqBM8sM'
+        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzYjE5Y2JhZGE0OTAwMTgxNTc4ZmUiLCJpYXQiOjE2NTQ3NzY1MTl9.ZMajv4JpiOASOcas18Na6Pu_YNJGZwJfdVqSysLgh3s'
 
         Routific.set_token(token)
         Routific.new
+      end
+
+      def fill_establishments_to_visit(establishments)
+        visits = establishments.map do |establishment|
+          {
+            'id' => establishment[:cnpj],
+            'start' => '9:00',
+            'end' => '12:00',
+            'duration' => 10,
+            'location' => {
+              'name' => establishment[:name],
+              'lat' => establishment[:latitude],
+              'lng' => establishment[:longitude]
+            }
+          }
+        end
+
+        visits.each do |visit|
+          routific.set_visit(visit['id'], visit)
+        end
+      end
+
+      def fill_vehicle(current_location)
+        routific.set_vehicle(
+          'my_car', {
+            'start_location' => {
+              'name' => 'Casa',
+              'lat' => current_location[:latitude],
+              'lng' => current_location[:longitude]
+            },
+            'end_location' => {
+              'name' => 'Casa',
+              'lat' => current_location[:latitude],
+              'lng' => current_location[:longitude]
+            },
+            'shift_start' => '8:00',
+            'shift_end' => '12:00'
+          }
+        )
+      end
+
+      def build_ideal_fair(products, optimized_route)
+        route = sanitize_route(optimized_route)
+        fair = build_fair_by_establishments(products)
+
+        route.map do |point|
+          fair[point.location_id]
+        end
+      end
+
+      def sanitize_route(optimized_route)
+        route = optimized_route.vehicle_routes.first.second
+        route.shift
+        route.pop
+        route
+      end
+
+      def build_fair_by_establishments(products)
+        hash = {}
+        products.each do |product|
+          hash[product[:establishment][:cnpj]] ||= []
+
+          if hash[product[:establishment][:cnpj]].first.nil?
+            hash[product[:establishment][:cnpj]] << { establishment: product[:establishment] }
+            hash[product[:establishment][:cnpj]] << { products: [] }
+          end
+
+          hash[product[:establishment][:cnpj]].second[:products] << {
+            name: '',
+            getin_code: product[:getin_code],
+            value: product[:value]
+          }
+        end
+        hash
       end
     end
   end

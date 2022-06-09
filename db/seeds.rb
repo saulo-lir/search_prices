@@ -68,8 +68,8 @@ business_establishments = [
     city_ibge_code: nil,
     city: 'SATUBA',
     state: 'AL',
-    latitude: -9.5716038,
-    longitude: -35.8249956
+    latitude: -9.544128267122234,
+    longitude: -35.81282494950382
   },
   {
     cnpj: '34333209000350',
@@ -237,7 +237,7 @@ products = [
   },
   {
     code: nil,
-    getin_code: '7896481130229',
+    getin_code: '7896481130229', # Cuscuz Coringa 500g
     cfop_code: nil,
     ncm_code: '11041900',
     anp_code: nil,
@@ -352,108 +352,88 @@ puts "#{count} Produtos criados com sucesso!\n"
 
 products_by_establishment = [
   {
-    getin_code: '7894900010398',
-    cnpj: '75315333027309',
-    unit_value_last_sale: 2.19,
-    value_last_sale: 2.19,
-    minimum_value_sold: 2.19,
-    maximum_value_sold: 2.19,
+    getin_code: '7891008045154', # COBER.CHOC.GAROTO
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 38.99,
+    value_last_sale: 38.99,
+    minimum_value_sold: 38.99,
+    maximum_value_sold: 38.99,
+    last_sale_issue_date: '2022-04-15T15:41:13.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7894900010398', # REF.COCA COLA MINI
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 3.19,
+    value_last_sale: 3.19,
+    minimum_value_sold: 3.19,
+    maximum_value_sold: 3.19,
     last_sale_issue_date: '2022-03-27T13:41:12.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7896336006686',
-    cnpj: '75315333027309',
-    unit_value_last_sale: 25.9,
-    value_last_sale: 25.9,
-    minimum_value_sold: 25.9,
-    maximum_value_sold: 25.9,
+    getin_code: '7896336006686', # D.PACOCA S.HELENA
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 26.9,
+    value_last_sale: 26.9,
+    minimum_value_sold: 26.9,
+    maximum_value_sold: 26.9,
     last_sale_issue_date: '2022-03-25T12:43:42.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7896045523412',
-    cnpj: '08618647000193',
-    unit_value_last_sale: 4.39,
-    value_last_sale: 4.39,
-    minimum_value_sold: 4.39,
-    maximum_value_sold: 4.39,
+    getin_code: '7896045523412', # Cerveja Heineken La
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 4.19,
+    value_last_sale: 4.19,
+    minimum_value_sold: 4.19,
+    maximum_value_sold: 4.19,
     last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7896481130229',
-    cnpj: '08618647000193',
-    unit_value_last_sale: 1.85,
-    value_last_sale: 1.85,
-    minimum_value_sold: 1.85,
-    maximum_value_sold: 1.85,
-    last_sale_issue_date: '2022-03-27T13:33:53.000+0000',
+    getin_code: '7896102501605', # FEIJAO QUERO CARIOCA PRONTO TP 340G
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 7.39,
+    value_last_sale: 7.39,
+    minimum_value_sold: 7.39,
+    maximum_value_sold: 7.39,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7896481192036',
-    cnpj: '10840716000827',
-    unit_value_last_sale: 1.99,
-    value_last_sale: 1.99,
-    minimum_value_sold: 1.99,
-    maximum_value_sold: 1.99,
-    last_sale_issue_date: '2022-03-26T12:16:00.000+0000',
+    getin_code: '7896038306053', # ARR PBO URBANO 1KG
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 4.99,
+    value_last_sale: 4.99,
+    minimum_value_sold: 4.99,
+    maximum_value_sold: 4.99,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7891000062661',
-    cnpj: '10840716000827',
-    unit_value_last_sale: 36.49,
-    value_last_sale: 36.49,
-    minimum_value_sold: 36.49,
-    maximum_value_sold: 36.49,
-    last_sale_issue_date: '2022-03-25T21:02:00.000+0000',
+    getin_code: '7896224800877', # CAFE S CLARA SCHET UN
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 8.99,
+    value_last_sale: 8.99,
+    minimum_value_sold: 8.99,
+    maximum_value_sold: 8.99,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7891000062661',
-    cnpj: '34333209000350',
-    unit_value_last_sale: 38.64,
-    value_last_sale: 38.64,
-    minimum_value_sold: 38.64,
-    maximum_value_sold: 38.64,
-    last_sale_issue_date: '2022-03-25T20:32:38.000+0000',
+    getin_code: '7891000062661', # LEIT NESTLE NINHO 1+ LT 800G
+    cnpj: '21789819000150', # BIG
+    unit_value_last_sale: 48.19,
+    value_last_sale: 48.19,
+    minimum_value_sold: 48.19,
+    maximum_value_sold: 48.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7898552308681',
-    cnpj: '39346861009894',
-    unit_value_last_sale: 46.99,
-    value_last_sale: 46.99,
-    minimum_value_sold: 46.99,
-    maximum_value_sold: 46.99,
-    last_sale_issue_date: '2022-03-27T13:33:10.000+0000',
-    last_sale_issue_date_description: ''
-  },
-  {
-    getin_code: '7896224800877',
-    cnpj: '39346861009894',
-    unit_value_last_sale: 4.95,
-    value_last_sale: 4.95,
-    minimum_value_sold: 4.95,
-    maximum_value_sold: 4.95,
-    last_sale_issue_date: '2022-03-26T22:14:38.000+0000',
-    last_sale_issue_date_description: ''
-  },
-  {
-    getin_code: '7896038306053',
-    cnpj: '13004510017235',
-    unit_value_last_sale: 4.29,
-    value_last_sale: 4.29,
-    minimum_value_sold: 4.29,
-    maximum_value_sold: 4.29,
-    last_sale_issue_date: '2022-03-27T13:50:42.000+0000',
-    last_sale_issue_date_description: ''
-  },
-  {
-    getin_code: '7891008045154',
-    cnpj: '75315333009831',
+    getin_code: '7891008045154', # COBER.CHOC.GAROTO
+    cnpj: '75315333009831', # ATACADÃO
     unit_value_last_sale: 64.9,
     value_last_sale: 64.9,
     minimum_value_sold: 64.9,
@@ -462,33 +442,263 @@ products_by_establishment = [
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7891000120606',
-    cnpj: '41185455000610',
-    unit_value_last_sale: 67.28,
-    value_last_sale: 67.28,
-    minimum_value_sold: 67.28,
-    maximum_value_sold: 67.28,
-    last_sale_issue_date: '2022-04-13T15:26:25.000+0000',
+    getin_code: '7894900010398', # REF.COCA COLA MINI
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 2.19,
+    value_last_sale: 2.19,
+    minimum_value_sold: 2.19,
+    maximum_value_sold: 2.19,
+    last_sale_issue_date: '2022-03-27T13:41:12.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7791875005360',
-    cnpj: '30753042000164',
-    unit_value_last_sale: 69,
-    value_last_sale: 69,
-    minimum_value_sold: 69,
-    maximum_value_sold: 69,
-    last_sale_issue_date: '2022-04-15T22:57:42.000+0000',
+    getin_code: '7896336006686', # D.PACOCA S.HELENA
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 25.9,
+    value_last_sale: 25.9,
+    minimum_value_sold: 25.9,
+    maximum_value_sold: 25.9,
+    last_sale_issue_date: '2022-03-25T12:43:42.000+0000',
     last_sale_issue_date_description: ''
   },
   {
-    getin_code: '7890130401173',
-    cnpj: '12303616000463',
-    unit_value_last_sale: 79.99,
-    value_last_sale: 79.99,
-    minimum_value_sold: 79.99,
-    maximum_value_sold: 79.99,
-    last_sale_issue_date: '2022-04-14T13:48:15.000+0000',
+    getin_code: '7896045523412', # Cerveja Heineken La
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 4.39,
+    value_last_sale: 4.39,
+    minimum_value_sold: 4.39,
+    maximum_value_sold: 4.39,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896102501605', # FEIJAO QUERO CARIOCA PRONTO TP 340G
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 8.39,
+    value_last_sale: 8.39,
+    minimum_value_sold: 8.39,
+    maximum_value_sold: 8.39,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896038306053', # ARR PBO URBANO 1KG
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 4.29,
+    value_last_sale: 4.29,
+    minimum_value_sold: 4.29,
+    maximum_value_sold: 4.29,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896224800877', # CAFE S CLARA SCHET UN
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 9.19,
+    value_last_sale: 9.19,
+    minimum_value_sold: 9.19,
+    maximum_value_sold: 9.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7898552308681', # FRALDA ZEUK M C/64 UN
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 56.99,
+    value_last_sale: 56.99,
+    minimum_value_sold: 56.99,
+    maximum_value_sold: 56.99,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891000062661', # LEIT NESTLE NINHO 1+ LT 800G
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 46.19,
+    value_last_sale: 46.19,
+    minimum_value_sold: 46.19,
+    maximum_value_sold: 46.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891000120606', # NUTREN NESTLE SENIOR CAFE COM LEITE 370
+    cnpj: '75315333009831', # ATACADÃO
+    unit_value_last_sale: 69.28,
+    value_last_sale: 69.28,
+    minimum_value_sold: 69.28,
+    maximum_value_sold: 69.28,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891008045154', # COBER.CHOC.GAROTO
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 53.64,
+    value_last_sale: 53.64,
+    minimum_value_sold: 53.64,
+    maximum_value_sold: 53.64,
+    last_sale_issue_date: '2022-04-15T15:41:13.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7894900010398', # REF.COCA COLA MINI
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 2.50,
+    value_last_sale: 2.50,
+    minimum_value_sold: 2.50,
+    maximum_value_sold: 2.50,
+    last_sale_issue_date: '2022-03-27T13:41:12.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896336006686', # D.PACOCA S.HELENA
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 25.9,
+    value_last_sale: 25.9,
+    minimum_value_sold: 25.9,
+    maximum_value_sold: 25.9,
+    last_sale_issue_date: '2022-03-25T12:43:42.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896045523412', # Cerveja Heineken La
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 4.99,
+    value_last_sale: 4.99,
+    minimum_value_sold: 4.99,
+    maximum_value_sold: 4.99,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896102501605', # FEIJAO QUERO CARIOCA PRONTO TP 340G
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 7.19,
+    value_last_sale: 7.19,
+    minimum_value_sold: 7.19,
+    maximum_value_sold: 7.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896038306053', # ARR PBO URBANO 1KG
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 5.39,
+    value_last_sale: 5.39,
+    minimum_value_sold: 5.39,
+    maximum_value_sold: 5.39,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896224800877', # CAFE S CLARA SCHET UN
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 10.19,
+    value_last_sale: 10.19,
+    minimum_value_sold: 10.19,
+    maximum_value_sold: 10.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7898552308681', # FRALDA ZEUK M C/64 UN
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 54,
+    value_last_sale: 54,
+    minimum_value_sold: 54,
+    maximum_value_sold: 54,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891000062661', # LEIT NESTLE NINHO 1+ LT 800G
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 43.19,
+    value_last_sale: 43.19,
+    minimum_value_sold: 43.19,
+    maximum_value_sold: 43.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891000120606', # NUTREN NESTLE SENIOR CAFE COM LEITE 370
+    cnpj: '08618647000193', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 62.28,
+    value_last_sale: 62.28,
+    minimum_value_sold: 62.28,
+    maximum_value_sold: 62.28,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7894900010398', # REF.COCA COLA MINI
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 1.19,
+    value_last_sale: 1.19,
+    minimum_value_sold: 1.19,
+    maximum_value_sold: 1.19,
+    last_sale_issue_date: '2022-03-27T13:41:12.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896336006686', # D.PACOCA S.HELENA
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 26,
+    value_last_sale: 26,
+    minimum_value_sold: 26,
+    maximum_value_sold: 26,
+    last_sale_issue_date: '2022-03-25T12:43:42.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896045523412', # Cerveja Heineken La
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 3.39,
+    value_last_sale: 3.39,
+    minimum_value_sold: 3.39,
+    maximum_value_sold: 3.39,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896102501605', # FEIJAO QUERO CARIOCA PRONTO TP 340G
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 8.99,
+    value_last_sale: 8.99,
+    minimum_value_sold: 8.99,
+    maximum_value_sold: 8.99,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896038306053', # ARR PBO URBANO 1KG
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 4.29,
+    value_last_sale: 4.29,
+    minimum_value_sold: 4.29,
+    maximum_value_sold: 4.29,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7896224800877', # CAFE S CLARA SCHET UN
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 9.39,
+    value_last_sale: 9.39,
+    minimum_value_sold: 9.39,
+    maximum_value_sold: 9.39,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
+    last_sale_issue_date_description: ''
+  },
+  {
+    getin_code: '7891000062661', # LEIT NESTLE NINHO 1+ LT 800G
+    cnpj: '10840716000827', # SUPERMERCADO SAO DOMINGOS
+    unit_value_last_sale: 49.19,
+    value_last_sale: 49.19,
+    minimum_value_sold: 49.19,
+    maximum_value_sold: 49.19,
+    last_sale_issue_date: '2022-03-27T13:34:20.000+0000',
     last_sale_issue_date_description: ''
   }
 ]
