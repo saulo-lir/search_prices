@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'routific'
-
 module V1
   module SearchPrices
     class ProductsController < ApplicationController
@@ -13,16 +11,21 @@ module V1
         establishments = BusinessEstablishment.new
         establishments = establishments.establishments_indexed_by_cnpj(cnpj: cnpjs)
 
-        product = ProductsByBusinessEstablishment.new
-        products, getin_codes_not_found = product.where(
+        product = Product.new
+        products_indexeds = product.products_indexed_by_getin_code(getin_code: getin_codes)
+
+        product_by_establishment = ProductsByBusinessEstablishment.new
+        products, getin_codes_not_found = product_by_establishment.where(
           getin_code: getin_codes,
           cnpj: cnpjs
         )
-        products = product.ideal_products(products, establishments)
-        #products = search_prices_online(getin_codes_not_found, cnpjs)
+        ideal_products = product_by_establishment.ideal_products(products, establishments)
+        # products = search_prices_online(getin_codes_not_found, cnpjs)
 
-        optimized_route = generate_route(products, current_location)
-        ideal_fair = build_ideal_fair(products, optimized_route)
+        route_generator = connect_routific_api
+
+        optimized_route = route_generator.generate_route(ideal_products, current_location)
+        ideal_fair = route_generator.build_ideal_fair(ideal_products, optimized_route, products_indexeds)
 
         render json: ideal_fair,
                status: :ok
@@ -49,8 +52,6 @@ module V1
       end
 
       private
-
-      attr_reader :routific
 
       def search_prices_online(getin_codes, cnpjs)
         url = 'http://api.sefaz.al.gov.br/sfz_nfce_api/api/public/consultarPrecoProdutoEmEstabelecimento'
@@ -79,95 +80,11 @@ module V1
         products.get_prices({ getin_code: '7898286201968', cnpj: '13004510039395' })
       end
 
-      def generate_route(products, current_location)
-        establishments = products.pluck(:establishment).uniq
-        @routific = connect_routific_api
-
-        fill_establishments_to_visit(establishments)
-        fill_vehicle(current_location)
-
-        routific.get_route
-      end
-
       def connect_routific_api
         token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjIzYjE5Y2JhZGE0OTAwMTgxNTc4ZmUiLCJpYXQiOjE2NTQ3NzY1MTl9.ZMajv4JpiOASOcas18Na6Pu_YNJGZwJfdVqSysLgh3s'
 
-        Routific.set_token(token)
-        Routific.new
-      end
-
-      def fill_establishments_to_visit(establishments)
-        visits = establishments.map do |establishment|
-          {
-            'id' => establishment[:cnpj],
-            'start' => '9:00',
-            'end' => '12:00',
-            'duration' => 10,
-            'location' => {
-              'name' => establishment[:name],
-              'lat' => establishment[:latitude],
-              'lng' => establishment[:longitude]
-            }
-          }
-        end
-
-        visits.each do |visit|
-          routific.set_visit(visit['id'], visit)
-        end
-      end
-
-      def fill_vehicle(current_location)
-        routific.set_vehicle(
-          'my_car', {
-            'start_location' => {
-              'name' => 'Casa',
-              'lat' => current_location[:latitude],
-              'lng' => current_location[:longitude]
-            },
-            'end_location' => {
-              'name' => 'Casa',
-              'lat' => current_location[:latitude],
-              'lng' => current_location[:longitude]
-            },
-            'shift_start' => '8:00',
-            'shift_end' => '12:00'
-          }
-        )
-      end
-
-      def build_ideal_fair(products, optimized_route)
-        route = sanitize_route(optimized_route)
-        fair = build_fair_by_establishments(products)
-
-        route.map do |point|
-          fair[point.location_id]
-        end
-      end
-
-      def sanitize_route(optimized_route)
-        route = optimized_route.vehicle_routes.first.second
-        route.shift
-        route.pop
-        route
-      end
-
-      def build_fair_by_establishments(products)
-        hash = {}
-        products.each do |product|
-          hash[product[:establishment][:cnpj]] ||= []
-
-          if hash[product[:establishment][:cnpj]].first.nil?
-            hash[product[:establishment][:cnpj]] << { establishment: product[:establishment] }
-            hash[product[:establishment][:cnpj]] << { products: [] }
-          end
-
-          hash[product[:establishment][:cnpj]].second[:products] << {
-            name: '',
-            getin_code: product[:getin_code],
-            value: product[:value]
-          }
-        end
-        hash
+        RouteGenerator.set_token(token)
+        RouteGenerator.new
       end
     end
   end

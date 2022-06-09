@@ -24,7 +24,6 @@ class ProductsByBusinessEstablishment < ApplicationRecord
   attr_reader :total_products_by_establishments, :total_value_by_establishments
 
   def products_indexed_by_getin_code(products, establishments)
-    # binding.pry
     hash = {}
     products.each do |product|
       hash[product.getin_code] ||= []
