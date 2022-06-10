@@ -4,8 +4,11 @@ module V1
   module SearchPrices
     class ProductsController < ApplicationController
       def prices
+        # TO DO:
+        # 1- Contemplar os casos onde o produto não é encontrado localmente, e portanto pesquisado na api da SEFAZ
+
         cnpjs = params[:cnpjs]
-        getin_codes = params[:getin_codes]
+        getin_codes = params[:getin_codes].pluck(:code)
         current_location = params[:current_location]
 
         establishments = BusinessEstablishment.new
@@ -19,7 +22,8 @@ module V1
           getin_code: getin_codes,
           cnpj: cnpjs
         )
-        ideal_products = product_by_establishment.ideal_products(products, establishments)
+
+        ideal_products = product_by_establishment.ideal_products(products, quantity_by_product, establishments)
         # products = search_prices_online(getin_codes_not_found, cnpjs)
 
         route_generator = connect_routific_api
@@ -78,6 +82,14 @@ module V1
       def search_prices_local
         products = ProductsByBusinessEstablishment.new
         products.get_prices({ getin_code: '7898286201968', cnpj: '13004510039395' })
+      end
+
+      def quantity_by_product
+        hash = {}
+        params[:getin_codes].each do |getin_code|
+          hash[getin_code[:code]] = { quantity: getin_code[:quantity] }
+        end
+        hash
       end
 
       def connect_routific_api

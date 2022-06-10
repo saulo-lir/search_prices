@@ -16,9 +16,11 @@ class RouteGenerator < Routific
     route = sanitize_route(optimized_route)
     fair = build_fair_by_establishments(products, products_indexed_by_getin_code)
 
-    route.map do |point|
+    fair = route.map do |point|
       fair[point.location_id]
     end
+
+    [resume: resume_hash(fair), details: fair]
   end
 
   private
@@ -89,15 +91,25 @@ class RouteGenerator < Routific
       end
 
       establishment = hash[product[:establishment][:cnpj]].first[:establishment]
-      establishment[:total_products] += 1
-      establishment[:total_value] += product[:value]
+      establishment[:total_products] += product[:quantity]
+      establishment[:total_value] += product[:subtotal]
       establishment[:total_value] = establishment[:total_value].round(2)
       hash[product[:establishment][:cnpj]].second[:products] << {
         name: products_indexed_by_getin_code[product[:getin_code]].description,
         getin_code: product[:getin_code],
-        value: product[:value]
+        unit_value: product[:unit_value],
+        quantity: product[:quantity],
+        subtotal: product[:subtotal]
       }
     end
     hash
+  end
+
+  def resume_hash(fair)
+    [
+      total_establishments: fair.flatten.pluck(:establishment).compact.length,
+      total_products: fair.flatten.pluck(:establishment).compact.pluck(:total_products).sum,
+      total_amount: fair.flatten.pluck(:establishment).compact.pluck(:total_value).sum.round(2)
+    ]
   end
 end
