@@ -23,7 +23,12 @@ module V1
         products = product.products_indexed_by_getin_code(getin_code: user_params[:getin_codes])
 
         optimized_route = route_generator.generate_route(ideal_products, current_location)
-        ideal_fair = route_generator.build_ideal_fair(ideal_products, optimized_route, products)
+        ideal_fair = route_generator.build_ideal_fair(
+          ideal_products,
+          optimized_route,
+          products,
+          user_params[:getin_codes]
+        )
 
         render json: ideal_fair,
                status: :ok

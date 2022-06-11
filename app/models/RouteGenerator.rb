@@ -12,7 +12,7 @@ class RouteGenerator < Routific
     self.get_route
   end
 
-  def build_ideal_fair(products, optimized_route, products_indexed_by_getin_code)
+  def build_ideal_fair(products, optimized_route, products_indexed_by_getin_code, getin_codes)
     route = sanitize_route(optimized_route)
     fair = build_fair_by_establishments(products, products_indexed_by_getin_code)
 
@@ -20,7 +20,7 @@ class RouteGenerator < Routific
       fair[point.location_id]
     end
 
-    [resume: resume_hash(fair), details: fair]
+    [resume: resume_hash(fair, getin_codes), details: fair]
   end
 
   private
@@ -105,11 +105,18 @@ class RouteGenerator < Routific
     hash
   end
 
-  def resume_hash(fair)
+  def resume_hash(fair, all_getin_codes)
+    establishments = fair.flatten.pluck(:establishment).compact
+    found_getin_codes = fair.flatten.pluck(:products).compact.flatten.pluck(:getin_code)
+    not_found_getin_codes = all_getin_codes - found_getin_codes
     [
-      total_establishments: fair.flatten.pluck(:establishment).compact.length,
-      total_products: fair.flatten.pluck(:establishment).compact.pluck(:total_products).sum,
-      total_amount: fair.flatten.pluck(:establishment).compact.pluck(:total_value).sum.round(2)
+      total_establishments: establishments.length,
+      total_products: establishments.pluck(:total_products).sum,
+      total_amount: establishments.pluck(:total_value).sum.round(2),
+      products_not_found: {
+        total: not_found_getin_codes.length,
+        getin_codes: not_found_getin_codes
+      }
     ]
   end
 end
