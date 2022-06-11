@@ -18,4 +18,22 @@ class BusinessEstablishment < ApplicationRecord
   def establishments_indexed_by_cnpj(where)
     BusinessEstablishment.where(where).index_by(&:cnpj)
   end
+
+  def create!(attrs)
+    BusinessEstablishment.create!(
+      cnpj: attrs['numCNPJ'],
+      company_name: attrs['nomRazaoSocial'],
+      trade_name: attrs['nomFantasia'],
+      phone: attrs['numTelefone'],
+      street: attrs['nomLogradouro'],
+      number: attrs['numImovel'],
+      neighborhood: attrs['nomBairro'],
+      zip_code: attrs['numCep'],
+      city_ibge_code: attrs['codIBGEMunicipio'],
+      city: attrs['nomMunicipio'],
+      state: 'AL',
+      latitude: attrs['numLatitude'],
+      longitude: attrs['numLongitude']
+    )
+  end
 end

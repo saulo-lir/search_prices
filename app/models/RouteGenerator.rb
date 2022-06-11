@@ -95,7 +95,7 @@ class RouteGenerator < Routific
       establishment[:total_value] += product[:subtotal]
       establishment[:total_value] = establishment[:total_value].round(2)
       hash[product[:establishment][:cnpj]].second[:products] << {
-        name: products_indexed_by_getin_code[product[:getin_code]].description,
+        name: products_indexed_by_getin_code[product[:getin_code]]&.description,
         getin_code: product[:getin_code],
         unit_value: product[:unit_value],
         quantity: product[:quantity],

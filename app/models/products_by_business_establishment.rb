@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
 class ProductsByBusinessEstablishment < ApplicationRecord
-  def get_prices(attrs)
-    ProductsByBusinessEstablishment.where(attrs)
-  end
-
-  def where(attrs)
-    products = ProductsByBusinessEstablishment.where(attrs)
-    getin_codes_not_found = attrs[:getin_code] - products.pluck(:getin_code)
-    [products, getin_codes_not_found]
-  end
-
-  def ideal_products(products, quantity_by_product, establishments)
+  def ideal_products(params, quantity_by_product, establishments)
+    products, getin_codes_not_found = find_products_by(getin_code: params[:getin_codes], cnpj: params[:cnpjs])
+    new_products = find_products_online(getin_codes_not_found)
+    new_products = save_new_products(new_products)
+    products += new_products
     @total_products_and_values = total_products_and_values_by_establishments(products, quantity_by_product)
     wanted_products = products_indexed_by_getin_code(products, establishments, quantity_by_product)
     wanted_products = cheaper_products(products.pluck(:getin_code), wanted_products)
@@ -21,6 +15,63 @@ class ProductsByBusinessEstablishment < ApplicationRecord
   private
 
   attr_reader :total_products_and_values
+
+  def find_products_by(attrs)
+    products = ProductsByBusinessEstablishment.where(attrs)
+    products_indexed = products_indexed_by_cnpj(products)
+    [products, getin_codes_not_found(products_indexed, attrs[:getin_code])]
+  end
+
+  def products_indexed_by_cnpj(products)
+    hash = {}
+    products.each do |product|
+      hash[product.cnpj] ||= []
+      hash[product.cnpj] << product
+    end
+    hash
+  end
+
+  def getin_codes_not_found(products_indexed, wanted_products)
+    hash = {}
+    products_indexed.each do |products|
+      cnpj = products.first
+      getin_codes = products.second.pluck(:getin_code)
+      hash[cnpj] ||= []
+      hash[cnpj] = wanted_products - getin_codes
+    end
+    hash
+  end
+
+  def find_products_online(getin_codes_indexed_by_cnpj)
+    sefaz_service = SefazAlService.new
+    sefaz_service.search_products_in_establishments(getin_codes_indexed_by_cnpj)
+  end
+
+  def save_new_products(products)
+    product_model = Product.new
+
+    products.map do |product|
+      product_model.create!(product.first)
+      create!(product.first)
+    end
+  end
+
+  def create!(attrs)
+    product = ProductsByBusinessEstablishment.find_by(getin_code: attrs['codGetin'], cnpj: attrs['numCNPJ'])
+
+    return unless product.nil?
+
+    ProductsByBusinessEstablishment.create!(
+      getin_code: attrs['codGetin'],
+      cnpj: attrs['numCNPJ'],
+      unit_value_last_sale: attrs['valUnitarioUltimaVenda'],
+      value_last_sale: attrs['valUltimaVenda'],
+      minimum_value_sold: attrs['valMinimoVendido'],
+      maximum_value_sold: attrs['valMaximoVendido'],
+      last_sale_issue_date: attrs['dthEmissaoUltimaVenda'],
+      last_sale_issue_date_description: attrs['txtDataUltimaEmissao']
+    )
+  end
 
   def total_products_and_values_by_establishments(products, quantity_by_product)
     hash = {}
