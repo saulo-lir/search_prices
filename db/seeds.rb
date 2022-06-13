@@ -295,6 +295,21 @@ business_establishments = [
     state: 'AL',
     latitude: -9.6311235,
     longitude: -35.7016483
+  },
+  {
+    cnpj: '17083095000157',
+    company_name: 'PANETUTTI PANIFICACAO LTDA',
+    trade_name: 'PANETUTTI',
+    phone: nil,
+    street: 'Rua PAULINA MARIA MENDONCA',
+    number: nil,
+    neighborhood: 'JATIUCA',
+    zip_code: '57035557',
+    city_ibge_code: nil,
+    city: 'MACEIO',
+    state: 'AL',
+    latitude: -9.644518,
+    longitude: -35.704607
   }
 ]
 
