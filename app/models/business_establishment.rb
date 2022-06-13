@@ -12,7 +12,7 @@ class BusinessEstablishment < ApplicationRecord
   end
 
   def get_establishment_by_current_location(location)
-    BusinessEstablishment.near([location[:latitude], location[:longitude]], 10, units: :km).to_a
+    BusinessEstablishment.near([location[:latitude], location[:longitude]], 8, units: :km).to_a
   end
 
   def establishments_indexed_by_cnpj(where)
