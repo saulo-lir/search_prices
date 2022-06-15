@@ -1302,6 +1302,16 @@ products_by_establishment = [
     last_sale_issue_date_description: 'Há 12 horas e 54 minutos'
   },
   {
+    getin_code: '7891350034639', # DESOD MONANGE 90G UN
+    cnpj: '08618647000355', # CESTA DE ALIMENTOS
+    unit_value_last_sale: 8.19,
+    value_last_sale: 8.19,
+    minimum_value_sold: 8.19,
+    maximum_value_sold: 8.19,
+    last_sale_issue_date: '2022-06-15T00:54:10.000+0000',
+    last_sale_issue_date_description: 'Há 12 horas e 54 minutos'
+  },
+  {
     getin_code: '7894900010398', # COCA COLA MINI LATA
     cnpj: '13004510017235', # BOMPRECO SUPERMERCADOS DO NORDESTE LTDA
     unit_value_last_sale: 2.19,
