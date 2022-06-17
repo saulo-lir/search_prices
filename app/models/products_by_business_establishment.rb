@@ -84,8 +84,8 @@ class ProductsByBusinessEstablishment < ApplicationRecord
       end
 
       quantity = quantity_by_product[product[:getin_code]][:quantity]
-      hash[product[:cnpj]].first[:total_products] += quantity
-      hash[product[:cnpj]].second[:total_value] += quantity * product[:value_last_sale].to_f
+      hash[product[:cnpj]].first[:total_products] += quantity.to_i
+      hash[product[:cnpj]].second[:total_value] += quantity.to_i * product[:value_last_sale].to_f
     end
     hash
   end
@@ -97,8 +97,8 @@ class ProductsByBusinessEstablishment < ApplicationRecord
       hash[product.getin_code] << {
         getin_code: product.getin_code,
         unit_value: product.value_last_sale.to_f,
-        quantity: quantity_by_product[product.getin_code][:quantity],
-        subtotal: (quantity_by_product[product.getin_code][:quantity] * product.value_last_sale.to_f).round(2),
+        quantity: quantity_by_product[product.getin_code][:quantity].to_i,
+        subtotal: (quantity_by_product[product.getin_code][:quantity].to_i * product.value_last_sale.to_f).round(2),
         establishment: {
           cnpj: product.cnpj,
           name: establishments[product.cnpj].trade_name || establishments[product.cnpj].company_name,
