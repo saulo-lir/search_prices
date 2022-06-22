@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'V1 Products', type: :request do
-  describe 'GET /v1/search_prices/products/prices' do
+  describe 'POST /v1/search_prices/products/prices' do
     subject(:get_prices) do
-      get '/v1/search_prices/products/prices',
+      post '/v1/search_prices/products/prices',
           params: params
     end
 

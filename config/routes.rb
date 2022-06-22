@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     namespace :search_prices do
       get '/establishments', to: 'establishments#index'
-      get '/products/prices', to: 'products#prices'
-      get '/products/search_prices_online', to: 'products#search_prices_online'
-      get '/products/ping', to: 'products#ping'
-      get '/products/generate_route', to: 'products#generate_route'
+      post '/products/prices', to: 'products#prices'
     end
   end
 end
