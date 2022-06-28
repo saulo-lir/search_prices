@@ -258,7 +258,7 @@ Dessa forma, atualmente só será possível pesquisar preços com os cnpjs infor
 
 ### Produtos
 
-Qualquer produto que possua um código de barras brasileiro válido poderá ser pesquisado.
+Qualquer produto que possua um código de barras aceito pela SEFAZ-AL poderá ser pesquisado.
 
 Atualmente existem diversos produtos cadastrados em nossa base, e ele aumenta dinamicamente conforme novas pesquisas forem feitas.
 
