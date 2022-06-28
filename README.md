@@ -8,7 +8,7 @@ Para consumir a API, basta usar um cliente REST. O mais recomendado é o softwar
 
 ## Utilizando a API
 
-### Rota GET /v1/search_prices/establishments
+### GET /v1/search_prices/establishments
 
 Retorna os estabelecimentos comerciais mais próximos do usuário, dentro de um raio de 8km.
 
@@ -16,15 +16,19 @@ No Postman, inserir a url `http://45.33.92.165:3000/v1/search_prices/establishme
 
 **Observação**: Devido a uma limitação do serviço gratuito de geocodifiação utilizado, só está sendo possível atualmente pegar a localização do centro de cada município. Em Maceió por exemplo, a localização selecionada é a da Rua do Sol, no centro (latitude: -9.6658, longitude: -35.7353).
 
-### Rota POST /v1/search_prices/products/prices
+### POST /v1/search_prices/products/prices
 
 Retorna em quais estabelecimentos estão mais baratos os produtos pesquisados, na ordem em que eles devem ser visitados, com a descrição detalhada dos preços individuais e totais.
+
+No Postman, inserir a url `http://45.33.92.165:3000/v1/search_prices/products/prices` e disparar a requisição. Essa rota utiliza os parâmetros informado abaixo.
 
 #### Parâmetros
 
 `cnpjs`: Lista de cnpjs dos estabelecimentos a serem consultados.
-`getin_codes`: Lista de códigos de barras dos produtos a serem pesquisados, junto com a quantidade de cada um
-`current_location`: Latitude e longitude do usuário
+
+`getin_codes`: Lista de códigos de barras dos produtos a serem pesquisados, junto com a quantidade de cada um.
+
+`current_location`: Latitude e longitude do usuário.
 
 #### Exemplo
 
