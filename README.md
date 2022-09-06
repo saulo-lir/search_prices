@@ -2,6 +2,8 @@
 
 API de consulta de preços em estabelecimentos comerciais de Alagoas.
 
+Esse foi um projeto desenvolvido como parte do TCC, do curso de Sistemas de Informação do Instituto Federal de Alagoas - IFAL - Campus Maceió.
+
 ## Requerimentos
 
 Para consumir a API, basta usar um cliente REST. O mais recomendado é o software [Postman](https://www.postman.com/), que foi o utilizado ao longo do desenvolvimento deste projeto.
